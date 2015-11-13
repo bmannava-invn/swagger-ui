@@ -1,0 +1,207 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Coursa Sports API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/datasets/sorted/filtered": {
+            "post": {
+                "tags": [
+                    "datasets/sorted/filtered"
+                ],
+                "summary": "Return coursa data for a specific user",
+                "description": "Get list of links for a specific user data",
+                "operationId": "/datasets/sorted/filtered",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "apikey",
+                        "in": "header",
+                        "description": "api key for fetch the client data",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "user id associated with the client data",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "daterange",
+                        "in": "header",
+                        "description": "date range",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "JSON object of list of files"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/authorize": {
+            "post": {
+                "tags": [
+                    "authorize"
+                ],
+                "summary": "Authorize DSL with an SDK key",
+                "description": "Validate an SDK key",
+                "operationId": "authorize",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sdkkey",
+                        "in": "header",
+                        "description": "Authorize DSL with an SDK key",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        },
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Missing sdkkey"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/dataset/checkupload": {
+            "post": {
+                "tags": [
+                    "dataset/checkupload"
+                ],
+                "summary": "Check list for uploaded file",
+                "description": "Grab a list of uploaded file",
+                "operationId": "/dataset/checkupload",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sdkkey",
+                        "in": "header",
+                        "description": "sdk key for the client to upload data",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceID",
+                        "in": "header",
+                        "description": "device id associated with the uploading dataset",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileList",
+                        "in": "header",
+                        "description": "Header of the file that has been uploaded",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "JSON object of list of files that have been uploaded"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/dataset": {
+            "post": {
+                "tags": [
+                    "dataset"
+                ],
+                "summary": "Upload dataset(s) to IPLC",
+                "description": "",
+                "operationId": "dataset",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sdkkey",
+                        "in": "header",
+                        "description": "sdk key for the client to upload data",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "uid",
+                        "in": "header",
+                        "description": "user id associated with the uploading dataset",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "deviceID",
+                        "in": "header",
+                        "description": "device id associated with the uploading dataset",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileName",
+                        "in": "header",
+                        "description": "File(s) to be uploaded",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File names and upload status"
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "GET_datasets": {
+            "required": [
+                "apikey",
+                "email"
+            ]
+        }
+    }
+}
